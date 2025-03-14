@@ -183,30 +183,7 @@ local Deathsay = {
 
 
 local ChatSpam = {
-	"Not to worry team, I'm a garbage collector. I'm used to carrying trash.",
-	"GET GOOD GET FISHHCHEAT",
-	"FISHHCHEAT - ONE STEP AHEAD OF THE GAME",
-	"I'm not hacking, i am just cheating.",
-	"*JAMACIAN SMILE ACTIVATED* those who know...",
-	"XATAWARE BEST HACK TC2 2023",
-	"I bought a property in Egypt and what they do for you is they give you the property",
-	"wait... why are we playing a chinese ripoff of TF2?",
-	"FISH FOR PRESIDENT 2029",
-	"--- SIGMAHACK EXECUTED ---",
-	"game:GetService('Byfron'):Destroy() EZEZEZ BYPASS",
-	"ain't no party like a bibulus party",
-	"For every Fishhcheat purchase, we donate to Israel.",
-	":3",
-	"The FitnessGram Pacer test, ever heard of it?",
-	"NONAMES RISE UP",
-	"INJECTING ESTROGEN.DLL",
-	":steamhappy:",
-	":troll:",
-	"give cool role pls",
-	"hey chatgpt how do i install tc2 hack",
-	"Sponsored by Omegatronic",
-	"GOD TYCOON > TC2",
-	"Exploit-er? I just met her!"
+	"Stand Ready for My Arrival Worm"
 }
 
 
@@ -279,7 +256,7 @@ local Tabs = {
 }
 
 local GB_Aimbot = Tabs.Aim:AddLeftGroupbox('Aimbot')
-GB_Aimbot:AddToggle('AimbotToggle', { Text = 'Aimbot', Default = true, Tooltip = 'Aims at enemies'}):AddKeyPicker('AimbotBind', { Default = 'LeftShift', NoUI = false, Mode = 'Hold', Text = 'Aimkey' })
+GB_Aimbot:AddToggle('AimbotToggle', { Text = 'Aimbot', Default = true, Tooltip = 'Aims at enemies'}):AddKeyPicker('AimbotBind', { Default = 'End', NoUI = false, Mode = 'Hold', Text = 'Aimkey' })
 GB_Aimbot:AddToggle('ProjAimbotToggle', { Text = 'Projectile Aimbot (BETA)', Default = true, Tooltip = '*Attempts* to predict player movement for projectile weapons\nUse hitbox expander for grenade launchers.'})
 GB_Aimbot:AddToggle('Wallcheck', { Text = 'Wallcheck', Default = false, Tooltip = 'Raycasts dont work properly on Solara, toggled off by default.'})
 GB_Aimbot:AddDropdown("TargetPart", {Values = {'Head', 'UpperTorso', 'HumanoidRootPart'}, Default = 3, Multi = false, Text = "Aimbot Part"})
