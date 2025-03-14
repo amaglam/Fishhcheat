@@ -252,17 +252,16 @@ RemoveShit(RepStorage.Other.ScaryMonsters.Trooper:FindFirstChild("Highlight")) -
 
 RemoveShit = nil
 
-local repo = 'https://raw.githubusercontent.com/mstudio45/LinoriaLib/refs/heads/main/'
+local repo = "https://raw.githubusercontent.com/deividcomsono/Obsidian/main/"
+local Library = loadstring(game:HttpGet(repo .. "Library.lua"))()
+local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))()
+local SaveManager = loadstring(game:HttpGet(repo .. "addons/SaveManager.lua"))()
 
-local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
-local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
-local Options = getgenv().Linoria.Options
-local Toggles = getgenv().Linoria.Toggles
+local Options = Library.Options
+local Toggles = Library.Toggles
 
-Library.ShowToggleFrameInKeybinds = true -- Make toggle keybinds work inside the keybinds UI (aka adds a toggle to the UI). Good for mobile users (Default value = true)
-Library.ShowCustomCursor = true -- Toggles the Linoria cursor globaly (Default value = true)
-Library.NotifySide = "Left" -- Changes the side of the notifications globaly (Left, Right) (Default value = Left)
+Library.ForceCheckbox = false -- Forces AddToggle to AddCheckbox
+Library.ShowToggleFrameInKeybinds = true -- Make
 
 local Window = Library:CreateWindow({
 	Title = 'FishhCheat v2',
@@ -615,52 +614,11 @@ task.spawn(function()
 	end
 end)
 
-Library:SetWatermarkVisibility(true)
-
-local FrameTimer = tick()
-local FrameCounter = 0;
-local FPS = 60;
-
-local Stats = game:GetService('Stats')
-
-local WatermarkConnection = RunService.RenderStepped:Connect(function()
-	FrameCounter = FrameCounter + 1; -- cuz of moonsec being retarded
-	Ping = Stats.Network.ServerStatsItem['Data Ping']:GetValue()
-
-	if (tick() - FrameTimer) >= 1 then
-		FPS = FrameCounter;
-		FrameTimer = tick();
-		FrameCounter = 0;
-	end;
-	if WatermarkVisible then
-		Library:SetWatermark(('FishhCheat v2 | %s fps | %s ms'):format(
-			math.floor(FPS),
-			math.floor(Ping)
-		));
-	end
-end);
-
-Library.KeybindFrame.Visible = true;
-
-Library:OnUnload(function()
-	WatermarkConnection:Disconnect()
-	Library.Unloaded = true
-end)
-
 -- UI Settings
 local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
 
 MenuGroup:AddButton('Unload', function() Library:Unload() end)
 MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'RightShift', NoUI = true, Text = 'Menu keybind' })
-MenuGroup:AddToggle("ShowWatermark", {
-	Text = "Show Cheat Watermark",
-	Default = true, 
-	Tooltip = "Shows the cheat watermark. Duh", 
-	Callback = function(Value)
-		WatermarkVisible = Value
-		Library:SetWatermarkVisibility(Value)
-	end
-})
 MenuGroup:AddToggle("ShowKeybinds", {
 	Text = "Show Keybinds Menu",
 	Default = true, 
