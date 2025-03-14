@@ -1,13 +1,3 @@
---[[
-    _____      __    __         __               __
-   / __(_)____/ /_  / /_  _____/ /_  ___  ____ _/ /_
-  / /_/ / ___/ __ \/ __ \/ ___/ __ \/ _ \/ __ `/ __/
- / __/ (__  ) / / / / / / /__/ / / /  __/ /_/ / /_
-/_/ /_/____/_/ /_/_/ /_/\___/_/ /_/\___/\__,_/\__/	v2 (Solara)
-4th March 2025
-
-]]
-
 repeat task.wait() until game:IsLoaded()
 
 -- asger keeps breaking his anticheat bypass so enjoy possibly detected script? :steamhappy:
@@ -58,7 +48,7 @@ FOVCircle.Color = Color3.new(255,255,255)
 FOVCircle.Thickness = 1
 FOVCircle.Filled = false
 
---RepStorage.VIPSettings.NoTeamLimits.Value = true
+RepStorage.VIPSettings.NoTeamLimits.Value = true
 --RepStorage.VIPSettings.EnabledSpectator.Value = true
 RepStorage.VIPSettings.NoVoiceCooldown.Value = true
 
@@ -258,20 +248,18 @@ RemoveShit(RepStorage.Other.ScaryMonsters.Trooper:FindFirstChild("Highlight")) -
 
 RemoveShit = nil
 
-local repo = 'https://raw.githubusercontent.com/mstudio45/LinoriaLib/refs/heads/main/'
+local repo = "https://raw.githubusercontent.com/deividcomsono/Obsidian/main/"
+local Library = loadstring(game:HttpGet(repo .. "Library.lua"))()
+local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))()
+local SaveManager = loadstring(game:HttpGet(repo .. "addons/SaveManager.lua"))()
+local Options = getgenv().Library.Options
+local Toggles = getgenv().Library.Toggles
 
-local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
-local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
-local Options = getgenv().Linoria.Options
-local Toggles = getgenv().Linoria.Toggles
-
+Library.ForceCheckbox = false -- Forces AddToggle to AddCheckbox
 Library.ShowToggleFrameInKeybinds = true -- Make toggle keybinds work inside the keybinds UI (aka adds a toggle to the UI). Good for mobile users (Default value = true)
-Library.ShowCustomCursor = true -- Toggles the Linoria cursor globaly (Default value = true)
-Library.NotifySide = "Left" -- Changes the side of the notifications globaly (Left, Right) (Default value = Left)
 
 local Window = Library:CreateWindow({
-	Title = 'FishhCheat v2 (Solara)',
+	Title = 'Amaglam',
 	Center = true,
 	AutoShow = true,
 	Resizable = true,
@@ -715,52 +703,11 @@ task.spawn(function()
 	end
 end)
 
-Library:SetWatermarkVisibility(true)
-
-local FrameTimer = tick()
-local FrameCounter = 0;
-local FPS = 60;
-
-local Stats = game:GetService('Stats')
-
-local WatermarkConnection = RunService.RenderStepped:Connect(function()
-	FrameCounter = FrameCounter + 1; -- cuz of moonsec being retarded
-	Ping = Stats.Network.ServerStatsItem['Data Ping']:GetValue()
-
-	if (tick() - FrameTimer) >= 1 then
-		FPS = FrameCounter;
-		FrameTimer = tick();
-		FrameCounter = 0;
-	end;
-	if WatermarkVisible then
-		Library:SetWatermark(('FishhCheat v2 | %s fps | %s ms'):format(
-			math.floor(FPS),
-			math.floor(Ping)
-		));
-	end
-end);
-
-Library.KeybindFrame.Visible = true;
-
-Library:OnUnload(function()
-	WatermarkConnection:Disconnect()
-	Library.Unloaded = true
-end)
-
 -- UI Settings
 local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
 
 MenuGroup:AddButton('Unload', function() Library:Unload() end)
 MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'RightShift', NoUI = true, Text = 'Menu keybind' })
-MenuGroup:AddToggle("ShowWatermark", {
-	Text = "Show Cheat Watermark",
-	Default = true, 
-	Tooltip = "Shows the cheat watermark. Duh", 
-	Callback = function(Value)
-		WatermarkVisible = Value
-		Library:SetWatermarkVisibility(Value)
-	end
-})
 MenuGroup:AddToggle("ShowKeybinds", {
 	Text = "Show Keybinds Menu",
 	Default = true, 
@@ -780,8 +727,8 @@ SaveManager:IgnoreThemeSettings()
 
 SaveManager:SetIgnoreIndexes({ 'MenuKeybind' })
 
-ThemeManager:SetFolder('FishhCheat_v2')
-SaveManager:SetFolder('FishhCheat_v2/Solara/TC2')
+ThemeManager:SetFolder('Amaglam_v1')
+SaveManager:SetFolder('Amaglam_v1/Solara/TC2')
 
 SaveManager:BuildConfigSection(Tabs['UI Settings'])
 
