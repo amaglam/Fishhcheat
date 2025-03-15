@@ -340,9 +340,9 @@ GB_PlayerMods:AddToggle('BHop', { Text = 'Auto Bunny Hop', Default = true, Toolt
 GB_PlayerMods:AddToggle('NoBHopCap', { Text = 'No Bunny Hop Cap', Default = false, Tooltip = 'Unlock speed cap while bunnyhopping'})
 GB_PlayerMods:AddToggle('NoSlowdown', { Text = 'No slowdown', Default = false, Tooltip = 'No slowdown when revving, scoping etc.'})
 GB_PlayerMods:AddDivider()
-GB_PlayerMods:AddToggle('SpeedMod', { Text = 'Speed modifier', Default = false, Tooltip = 'Modify player speed'}):AddKeyPicker('AimbotBind', { Default = 'Shift', NoUI = false, Mode = 'Hold', Text = 'Aimkey' })
+GB_PlayerMods:AddToggle('SpeedMod', { Text = 'Speed modifier', Default = false, Tooltip = 'Modify player speed'}):AddKeyPicker('SpeedBind', { Default = 'Shift', NoUI = false, Mode = 'Hold', Text = 'Aimkey' })
 GB_PlayerMods:AddSlider('SpeedAmount', {Text = 'Speed', Default = 500, Min = 100, Max = 4000, Rounding = 2, Compact = true})
-GB_PlayerMods:AddToggle('JumpMod', { Text = 'Jump modifier', Default = false, Tooltip = 'Modify player jump height'}):AddKeyPicker('AimbotBind', { Default = 'CapLock', NoUI = false, Mode = 'Toggle', Text = 'Aimkey' })
+GB_PlayerMods:AddToggle('JumpMod', { Text = 'Jump modifier', Default = false, Tooltip = 'Modify player jump height'}):AddKeyPicker('JumpBind', { Default = 'CapLock', NoUI = false, Mode = 'Toggle', Text = 'Aimkey' })
 GB_PlayerMods:AddSlider('JumpAmount', {Text = 'Power', Default = 100, Min = 50, Max = 200, Rounding = 2, Compact = true})
 
 Toggles.BHop:OnChanged(function()
