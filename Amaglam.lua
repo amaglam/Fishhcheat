@@ -362,7 +362,7 @@ GB_WeaponMods:AddToggle('InfAmmo', { Text = 'Infinite Ammo', Default = false, To
 GB_WeaponMods:AddToggle('Wallbang', { Text = 'Wallbang', Default = false, Tooltip = 'Shoot through walls'})
 GB_WeaponMods:AddToggle('InfCloak', { Text = 'Infinite Cloak', Default = false, Tooltip = 'Infinite cloak for Agent'})
 GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields', Default = true, Disabled = false, Visible = true, Risky = True}) -- Possibly detected
-GB_WeaponMods:AddToggle('FirerateChanger', { Text = 'Firerate Modifier', Default = false, Tooltip = 'Modify the firerate of most weapons', Default = true, Disabled = false, Visible = true, Risky = True})
+GB_WeaponMods:AddToggle('FirerateChanger', { Text = 'Firerate Modifier', Default = false, Tooltip = 'Modify the firerate of most weapons', Default = true, Disabled = false, Visible = true, Risky = true})
 GB_WeaponMods:AddSlider('FirerateAmount', {Text = 'Firerate', Default = 0.2, Min = 0.1, Max = 1, Rounding = 2, Compact = true})
 
 Toggles.AlwaysBackstab:OnChanged(function() -- Always Backstab
@@ -1616,6 +1616,7 @@ index = hookmetamethod(game, "__index", newcclosure(function(self, key)
             return workspace.Map
         end
     end
+			
     return index(self, key)
 end))
 	
