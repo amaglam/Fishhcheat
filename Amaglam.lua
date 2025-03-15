@@ -359,8 +359,12 @@ local GB_WeaponMods = Tabs.Mods:AddLeftGroupbox('Weapon Mods')
 GB_WeaponMods:AddToggle('AlwaysBackstab', { Text = 'Always Backstab', Default = false, Tooltip = 'Always backstab as Agent'})
 GB_WeaponMods:AddToggle('NoSpread', { Text = 'Reduced Spread', Default = false, Tooltip = 'Significantly reduced spread for most weapons'})
 GB_WeaponMods:AddToggle('InfAmmo', { Text = 'Infinite Ammo', Default = false, Tooltip = 'Infinite ammo on all weapons'})
+GB_WeaponMods:AddToggle('Wallbang', { Text = 'Wallbang', Default = false, Tooltip = 'Shoot through walls'})
 GB_WeaponMods:AddToggle('InfCloak', { Text = 'Infinite Cloak', Default = false, Tooltip = 'Infinite cloak for Agent'})
---GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields'}) -- Possibly detected
+GB_WeaponMods:AddToggle('MaxBuildings', { Text = 'Instant LVL 3 Buildings', Default = false, Tooltip = "Mechanic buildings will instantly be lvl 3 once deployed"})
+GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields', Default = true, Disabled = false, Visible = true, Risky = True}) -- Possibly detected
+GB_WeaponMods:AddToggle('FirerateChanger', { Text = 'Firerate Modifier', Default = false, Tooltip = 'Modify the firerate of most weapons', Default = true, Disabled = false, Visible = true, Risky = True})
+GB_WeaponMods:AddSlider('FirerateAmount', {Text = 'Firerate', Default = 0.2, Min = 0.1, Max = 1, Rounding = 2, Compact = true})
 
 Toggles.AlwaysBackstab:OnChanged(function() -- Always Backstab
     if Toggles.AlwaysBackstab.Value then
@@ -445,27 +449,6 @@ GB_Auto:AddSlider('AutoDetonateRange', {Text = 'Range', Default = 9.125, Min = 9
 GB_Auto:AddDivider()
 GB_Auto:AddToggle('AutoAirblast', { Text = 'Auto Airblast', Default = false, Tooltip = 'Automatically airblast projectiles'})
 GB_Auto:AddToggle('AutoAirblastExt', { Text = 'Extinguish teammates', Default = false, Tooltip = 'Auto Airblast will extinguish teammates'})
-GB_Auto:AddDivider()
-GB_Auto:AddButton('Spawn LVL 3 Sentry', function()
-	if not LegacyLocalVariables.died.Value and LocalPlayer.Status.Class.Value == "Mechanic" then
-		RepStorage.Events.DeployBuilding:FireServer(LocalPlayer.Character.LowerTorso.CFrame + Vector3.new(0, -2, 0), "Sentry", true, 3, 216, 200, 200, 0, 0, LocalPlayer.Status.Team.Value)
-	end	
-end)
-GB_Auto:AddButton('Spawn LVL 3 Dispenser', function()
-	if not LegacyLocalVariables.died.Value and LocalPlayer.Status.Class.Value == "Mechanic" then
-		RepStorage.Events.DeployBuilding:FireServer(LocalPlayer.Character.LowerTorso.CFrame + Vector3.new(0, -2, 0), "Dispenser", true, 3, 216, 200, 200, 0, 0, LocalPlayer.Status.Team.Value)
-	end	
-end)
-GB_Auto:AddButton('Spawn LVL 3 TP Entrance', function()
-	if not LegacyLocalVariables.died.Value and LocalPlayer.Status.Class.Value == "Mechanic" then
-		RepStorage.Events.DeployBuilding:FireServer(LocalPlayer.Character.LowerTorso.CFrame + Vector3.new(0, -2, 0), "Teleporter Entrance", true, 3, 216, 200, 200, 0, 0, LocalPlayer.Status.Team.Value)
-	end	
-end)
-GB_Auto:AddButton('Spawn LVL 3 TP Exit', function()
-	if not LegacyLocalVariables.died.Value and LocalPlayer.Status.Class.Value == "Mechanic" then
-		RepStorage.Events.DeployBuilding:FireServer(LocalPlayer.Character.LowerTorso.CFrame + Vector3.new(0, -2, 0), "Teleporter Exit", true, 3, 216, 200, 200, 0, 0, LocalPlayer.Status.Team.Value)
-	end	
-end)
 
 local GB_Spam = Tabs.Automation:AddRightGroupbox('Spam')
 GB_Spam:AddToggle('ChatSpamToggle', { Text = 'Chat Spam', Default = false, Tooltip = 'Spam random shit in chat lol'})
@@ -521,7 +504,7 @@ GB_Removals:AddToggle('NoSniperScope', {Text = 'No Rifle Scope', Default = false
 GB_Removals:AddToggle('NoSniperBeam', {Text = 'No Rifle Beam', Default = false, Tooltip = "Block the remote for the rifle's beam (serversided)"})
 GB_Removals:AddToggle('NoUndisguise', {Text = 'No Undisguising After Attack', Default = false, Tooltip = 'Block the remote for undisguising'})
 GB_Removals:AddToggle('NoSelfDamage', {Text = 'No Self Melee Damage', Default = false, Tooltip = 'No more self damage for certain melees'})
---GB_Removals:AddToggle('InstantRespawn', {Text = 'No Respawn Cooldown', Default = false, Tooltip = 'aka Instant Respawn'}) -- Detected probably?
+GB_Removals:AddToggle('InstantRespawn', {Text = 'No Respawn Cooldown', Default = false, Tooltip = 'aka Instant Respawn', Default = true, Disabled = false, Visible = true, Risky = True}) -- Detected probably?
 
 Toggles.NoSniperScope:OnChanged(function()
 	if Toggles.NoSniperScope.Value then
@@ -617,6 +600,14 @@ Toggles.NoSelfDamage:OnChanged(function()
 		end
 	end
 end)
+
+		elseif self.Name == "DeployBuilding" and Toggles.MaxBuildings.Value then
+			return namecall(self, Arguments[1], Arguments[2], true, 3, 216, 200, 200, 0, 0, Arguments[10])		
+        elseif Toggles.AnticheatBypass.Value and BadRemotes[self.Name] or (string.find(string.lower(self.Name), "ban") and not self.Name == "UseBanner") then
+			if Toggles.NotifyBypass.Value then Library:Notify("Successfully blocked ban from remote " .. self.Name) end
+            return
+        end
+end
 
 local GB_Fun = Tabs.Misc:AddLeftGroupbox('Fun')
 GB_Fun:AddToggle('Spinbot', {Text = 'Spin Bot', Default = false, Tooltip = 'Spins your character around'})
@@ -1629,5 +1620,20 @@ task.spawn(function() while task.wait(Options.ChatSpamDelay.Value) do
 	if Library.Unloaded then break end	
 	end
 end)
+
+local index -- Wallbang
+index = hookmetamethod(game, "__index", newcclosure(function(self, key)
+    if not Library.Unloaded then
+		if key == "Value" and self:IsA("ValueBase") and not checkcaller() then
+			if self.Name:lower():match("firerate") and Toggles.FirerateChanger.Value and not self.Parent:FindFirstChild("Projectile") then
+				return Options.FirerateAmount.Value
+			end
+		end
+        if Toggles.Wallbang.Value and key == "Clips" then
+            return workspace.Map
+        end
+    end
+    return index(self, key)
+end))
 
 Library:Notify("Welcome, " .. LocalPlayer.DisplayName)
