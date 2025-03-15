@@ -237,6 +237,8 @@ Library.ShowToggleFrameInKeybinds = true -- Make toggle keybinds work inside the
 
 local Window = Library:CreateWindow({
 	Title = 'Amaglam',
+	Footer = "version: 1",
+	Icon = 82191595,
 	Center = true,
 	AutoShow = true,
 	Resizable = true,
