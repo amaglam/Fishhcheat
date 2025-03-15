@@ -1,7 +1,7 @@
 repeat task.wait() until game:IsLoaded()
 
 -- asger keeps breaking his anticheat bypass so enjoy possibly detected script? :steamhappy:
---loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f1fde88a51d2fc5fad5548db80a256c2.lua"))()
+--loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f1fde88a51d2fc5fad5548db80a256c2.lua"))() and 
 
 local Players = cloneref(game:GetService("Players"))
 local LocalPlayer = Players.LocalPlayer
@@ -686,7 +686,7 @@ end)
 local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
 
 MenuGroup:AddButton('Unload', function() Library:Unload() end)
-MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'RightShift', NoUI = true, Text = 'Menu keybind' })
+MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'RightShift', NoUI = false, Mode = 'Toggle' Text = 'Menu keybind' })
 MenuGroup:AddToggle("ShowKeybinds", {
 	Text = "Show Keybinds Menu",
 	Default = true, 
