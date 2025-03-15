@@ -1603,14 +1603,6 @@ RunService.RenderStepped:Connect(function()
 	end
 
 end)
-	
-task.spawn(function() while task.wait(Options.ChatSpamDelay.Value) do
-	if Toggles.ChatSpamToggle.Value then -- Chat Spam
-		RepStorage.Events.ChatMessage:FireServer(ChatSpam[math.random(1, #ChatSpam)], false)
-	end
-	if Library.Unloaded then break end	
-	end
-end)
 
 local index -- Wallbang
 index = hookmetamethod(game, "__index", newcclosure(function(self, key)
@@ -1626,5 +1618,13 @@ index = hookmetamethod(game, "__index", newcclosure(function(self, key)
     end
     return index(self, key)
 end))
+	
+task.spawn(function() while task.wait(Options.ChatSpamDelay.Value) do
+	if Toggles.ChatSpamToggle.Value then -- Chat Spam
+		RepStorage.Events.ChatMessage:FireServer(ChatSpam[math.random(1, #ChatSpam)], false)
+	end
+	if Library.Unloaded then break end	
+	end
+end)
 
 Library:Notify("Welcome, " .. LocalPlayer.DisplayName)
