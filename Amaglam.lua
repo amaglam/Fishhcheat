@@ -446,6 +446,27 @@ GB_Auto:AddSlider('AutoDetonateRange', {Text = 'Range', Default = 9.125, Min = 9
 GB_Auto:AddDivider()
 GB_Auto:AddToggle('AutoAirblast', { Text = 'Auto Airblast', Default = false, Tooltip = 'Automatically airblast projectiles'})
 GB_Auto:AddToggle('AutoAirblastExt', { Text = 'Extinguish teammates', Default = false, Tooltip = 'Auto Airblast will extinguish teammates'})
+GB_Auto:AddDivider()
+GB_Auto:AddButton('Spawn LVL 3 Sentry', function()
+	if not LegacyLocalVariables.died.Value and LocalPlayer.Status.Class.Value == "Mechanic" then
+		RepStorage.Events.DeployBuilding:FireServer(LocalPlayer.Character.LowerTorso.CFrame + Vector3.new(0, -2, 0), "Sentry", true, 3, 216, 200, 200, 0, 0, LocalPlayer.Status.Team.Value)
+	end	
+end)
+GB_Auto:AddButton('Spawn LVL 3 Dispenser', function()
+	if not LegacyLocalVariables.died.Value and LocalPlayer.Status.Class.Value == "Mechanic" then
+		RepStorage.Events.DeployBuilding:FireServer(LocalPlayer.Character.LowerTorso.CFrame + Vector3.new(0, -2, 0), "Dispenser", true, 3, 216, 200, 200, 0, 0, LocalPlayer.Status.Team.Value)
+	end	
+end)
+GB_Auto:AddButton('Spawn LVL 3 TP Entrance', function()
+	if not LegacyLocalVariables.died.Value and LocalPlayer.Status.Class.Value == "Mechanic" then
+		RepStorage.Events.DeployBuilding:FireServer(LocalPlayer.Character.LowerTorso.CFrame + Vector3.new(0, -2, 0), "Teleporter Entrance", true, 3, 216, 200, 200, 0, 0, LocalPlayer.Status.Team.Value)
+	end	
+end)
+GB_Auto:AddButton('Spawn LVL 3 TP Exit', function()
+	if not LegacyLocalVariables.died.Value and LocalPlayer.Status.Class.Value == "Mechanic" then
+		RepStorage.Events.DeployBuilding:FireServer(LocalPlayer.Character.LowerTorso.CFrame + Vector3.new(0, -2, 0), "Teleporter Exit", true, 3, 216, 200, 200, 0, 0, LocalPlayer.Status.Team.Value)
+	end	
+end)
 
 local GB_Spam = Tabs.Automation:AddRightGroupbox('Spam')
 GB_Spam:AddToggle('ChatSpamToggle', { Text = 'Chat Spam', Default = false, Tooltip = 'Spam random shit in chat lol'})
