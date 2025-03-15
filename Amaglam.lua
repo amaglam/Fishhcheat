@@ -49,7 +49,7 @@ FOVCircle.Thickness = 1
 FOVCircle.Filled = false
 
 RepStorage.VIPSettings.NoTeamLimits.Value = true
---RepStorage.VIPSettings.EnabledSpectator.Value = true
+RepStorage.VIPSettings.EnabledSpectator.Value = true
 RepStorage.VIPSettings.NoVoiceCooldown.Value = true
 
 if not Lighting:FindFirstChild('ColorCorrection') then
@@ -307,7 +307,7 @@ GB_ESP:AddSlider('ViewTracerDistance', {Text = 'View Tracer Distance', Default =
 GB_ESP:AddSlider('TextSize', {Text = 'Text Size', Default = 13, Min = 0, Max = 50, Rounding = 0, Suffix = '', Compact = false})
 GB_ESP:AddSlider('TextFont', {Text = 'Text Font', Default = 1, Min = 0, Max = 3, Rounding = 0, Suffix = '', Compact = false})
 GB_View:AddToggle('customfov', { Text = 'FOV Modifications', Default = true, Tooltip = 'Toggles FOV Modifications'})
-GB_View:AddSlider('customfovamount', { Text = '', Default = 90, Min = 0, Max = 190, Rounding = 0, Suffix = '°/120°', Compact = true})
+GB_View:AddSlider('customfovamount', { Text = '', Default = 90, Min = 0, Max = 190, Rounding = 0, Suffix = '°/190°', Compact = true})
 GB_World:AddToggle('ColorCorrectionToggle', { Text = 'Color Correction', Default = true, Tooltip = 'Overlay color on screen'}):AddColorPicker('ColorCorrection', {Default = Color3.fromRGB(153, 90, 198), Title = 'Color'})
 GB_World:AddToggle('NightMode', { Text = 'Night Mode', Default = true, Tooltip = 'Night mode!'})
 GB_World:AddDropdown("LightingTechnology", {Values = {'Voxel', 'ShadowMap', 'Legacy', 'Future', 'Compatibility'}, Default = 2, Multi = false, Text = "Lighting Technology"})
@@ -338,9 +338,9 @@ GB_PlayerMods:AddToggle('BHop', { Text = 'Auto Bunny Hop', Default = true, Toolt
 GB_PlayerMods:AddToggle('NoBHopCap', { Text = 'No Bunny Hop Cap', Default = false, Tooltip = 'Unlock speed cap while bunnyhopping'})
 GB_PlayerMods:AddToggle('NoSlowdown', { Text = 'No slowdown', Default = false, Tooltip = 'No slowdown when revving, scoping etc.'})
 GB_PlayerMods:AddDivider()
-GB_PlayerMods:AddToggle('SpeedMod', { Text = 'Speed modifier', Default = false, Tooltip = 'Modify player speed'})
-GB_PlayerMods:AddSlider('SpeedAmount', {Text = 'Speed', Default = 500, Min = 100, Max = 2000, Rounding = 2, Compact = true})
-GB_PlayerMods:AddToggle('JumpMod', { Text = 'Jump modifier', Default = false, Tooltip = 'Modify player jump height'})
+GB_PlayerMods:AddToggle('SpeedMod', { Text = 'Speed modifier', Default = false, Tooltip = 'Modify player speed'}):AddKeyPicker('AimbotBind', { Default = 'Shift', NoUI = false, Mode = 'Hold', Text = 'Aimkey' })
+GB_PlayerMods:AddSlider('SpeedAmount', {Text = 'Speed', Default = 500, Min = 100, Max = 4000, Rounding = 2, Compact = true})
+GB_PlayerMods:AddToggle('JumpMod', { Text = 'Jump modifier', Default = false, Tooltip = 'Modify player jump height'}):AddKeyPicker('AimbotBind', { Default = 'CapLock', NoUI = false, Mode = 'Toggle', Text = 'Aimkey' })
 GB_PlayerMods:AddSlider('JumpAmount', {Text = 'Power', Default = 100, Min = 50, Max = 200, Rounding = 2, Compact = true})
 
 Toggles.BHop:OnChanged(function()
