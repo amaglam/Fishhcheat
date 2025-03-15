@@ -619,9 +619,9 @@ LegacyLocalVariables.died:GetPropertyChangedSignal('Value'):Connect(function()
 		if Toggles.OneLife.Value then
 			game:GetService("TeleportService"):Teleport(16167003515, LocalPlayer) -- lmao
 		end
-		--if Toggles.InstantRespawn.Value then -- Instant Respawn
-			--RepStorage.Events.LoadCharacter:FireServer()
-		--end
+		if Toggles.InstantRespawn.Value then -- Instant Respawn
+			RepStorage.Events.LoadCharacter:FireServer()
+		end
 		if Toggles.Deathsay.Value then -- Deathsay
 			RepStorage.Events.ChatMessage:FireServer(Deathsay[math.random(1, #Deathsay)], false)
 		end
